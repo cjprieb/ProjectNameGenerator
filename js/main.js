@@ -3,11 +3,25 @@ var adjectives = [];
 var buttons = [];
 var holdon = [];
 
+function setCheckedStyle(checkbox) {
+  console.log("checkbox", checkbox);
+  if (checkbox.checked) {
+    $(checkbox).parent().parent().addClass("lock_checked");
+    // $(checkbox).removeClass("lock_unchecked");
+  }
+  else {
+    // $(checkbox).addClass("lock_unchecked");
+    $(checkbox).parent().parent().removeClass("lock_checked");
+  }
+}
+
 $( document ).ready(function() {
   $("#theName").hide(0);
   $("#frameworkname").hide(0);
   $("#makeName").hide(0);
   $("#hold").text("loading...")
+  $("#lockAttribute").change(function() {setCheckedStyle(this);});
+  $("#lockNoun").change(function() {setCheckedStyle(this);});
   var removeEmptyFilter = function (item) {
     return item.trim().length > 0
   };
@@ -85,9 +99,13 @@ function randomMsg() {
 };
 
 function yolo() {
-  nounlist = nounlist.filter(e => e !== currentNoun);
+  if (currentNoun != undefined) {
+    nounlist = nounlist.filter(e => e !== currentNoun);
+  }
   console.log(nounlist.length);
-  adjectives = adjectives.filter(e => e !== currentAdj);
+  if (currentAdj != undefined) {
+    adjectives = adjectives.filter(e => e !== currentAdj);
+  }
   console.log(adjectives.length);
 }
 
@@ -110,6 +128,10 @@ function define(adj, noun) {
 }
 
 function randomAdj() {
+  var lockAttribute = $("#lockAttribute").is(":checked");
+  console.log("lockAttribute", lockAttribute);
+  if (lockAttribute && typeof currentAdj !== 'undefined') return;
+  
   // extract a adjective
   var randAdj = Math.floor(Math.random() * adjectives.length);
   currentAdj = adjectives[randAdj];
@@ -127,6 +149,10 @@ function randomAdj() {
 }
 
 function randomNoun() {
+  var lockNoun = $("#lockNoun").is(":checked");
+  console.log("lockNoun", lockNoun);
+  if (lockNoun && typeof currentNoun !== 'undefined') return;
+
   // extract a noun
   var randLineNum = Math.floor(Math.random() * nounlist.length);
   currentNoun = nounlist[randLineNum];

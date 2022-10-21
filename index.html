@@ -81,7 +81,23 @@
       <span id="hold" class="trnt_text"></span>
     </div>
           <div id="frameworkname">
-            <div id="theName"><span id="theAdj"></span> <span id="theNoun"></span></div>
+            <div id="theName">
+              <div class="name-container lock_checked">
+                <span class="lock">
+                  <input type="checkbox" id="lockAttribute" title="Prevent the attribute from changing" checked />
+                  <label for="lockAttribute" title="Prevent the attribute from changing">Lock</label>
+                </span>
+                <span class="name-value" id="theAdj"></span> 
+              </div>
+              <span class="name-value">&nbsp;</span>
+              <div class="name-container">
+                <span class="lock">
+                  <input type="checkbox" id="lockNoun" title="Prevent the noun from changing" />
+                  <label for="lockNoun" title="Prevent the noun from changing">Lock</label>
+                </span>
+                <span class="name-value" id="theNoun"></span>
+              </div>
+            </div>
             <div id="theMeaning">
               <div id="definition"></div>
               <div id="description"></div>
